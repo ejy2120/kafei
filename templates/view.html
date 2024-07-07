@@ -1,0 +1,108 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cafe Page</title>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+    </head>
+    
+    <body>
+        <div class="header"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-7 padding-top inline-block">
+                    <h2><b>{{cafe.name}}</b><button id="edit_cafe" style="margin-left: 5px;">&#128395;</button></h2>
+                </div>
+                <div class="col-2 padding-top">
+                </div>
+                <div class="col-3 inline-block">
+                    <p class="inline-block google_rating">{{ cafe.google_rating }}</p>
+                    {% set stars = cafe.google_rating | float // 1 %}
+                    {% for _ in range(stars | int) %}
+                        &#11088;
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="padding-top">
+                    <img class="img-crop" src="{{ cafe.image1 }}" alt="{{ cafe.image1alt }}">
+                </div>
+                <div class="padding-top">
+                    <img class="img-crop" src="{{ cafe.image2 }}"  alt="{{ cafe.image2alt }}">
+                </div>
+                <div class="padding-top">
+                    <img class="img-crop" src="{{ cafe.image3 }}"  alt="{{ cafe.image3alt }}">
+                </div>
+                <div class="padding-top">
+                    <img class="img-crop" src="{{ cafe.image4 }}"  alt="{{ cafe.image4alt }}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-5 padding-top">
+                    <h4 class="padding-top">About</h4>
+                    <p class="text-align-justified">{{ cafe.about }}</p>
+                    <h4 class="padding-top">Amenities</h4>
+                    <div class="text-align-justified container">
+                        <div class="row">
+                            {% for amenity in cafe.amenities %}
+                            <div class="col-6">
+                                <span class="emoji">
+                                    {% if amenity == "Wifi" %}
+                                        &#x1F4F6;
+                                    {% elif amenity == "Outlets" %}
+                                        &#x1F50C;
+                                    {% elif amenity == "Medium noise" or amenity == "Medium high noise" or amenity == "Loud noise" %}
+                                        &#x1F50A;
+                                    {% elif amenity == "Quiet noise" %}
+                                        &#x1F507;
+                                    {% elif amenity == "Other WFHs" %}
+                                        &#x1F4BB;
+                                    {% elif amenity == "Water" %}
+                                        &#x1F4A7;
+                                    {% elif amenity == "Restrooms" %}
+                                        &#x1F6BB;
+                                    {% endif %}
+                                </span>
+                                {{ amenity }}
+                            </div>
+                            {% if loop.index is even %}
+                                </div><div class="row">
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="padding-top">Insider Tips</h4>
+                        <p class="text-align-justified">{{ cafe.insidertips }}</p>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-3 padding-top">
+                    <div>
+                        <h4 class="padding-top">Open Hours</h4>
+                        <ul class="text-align-justified">
+                            {% for hour in cafe.open_hours %}
+                            <li style="margin-left: -20px;">{{ hour }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <p class="row text-align-justified" style="margin-left: 8px;"><b>{{ cafe.borough }}</b></p>
+                    <p class="row text-align-justified" style="margin-left: 8px;">{{ cafe.address }}</p>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+        <div class="footer"></div>
+        
+        
+    </body>
+</html>
+
+{% endblock %}

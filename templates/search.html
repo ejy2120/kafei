@@ -1,0 +1,65 @@
+{% extends "navbar.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search Results</title>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+</head>
+    
+<body>
+    <h1 class="font-family search-results">Search Results for "{{query}}"</h1>
+    {% if not results %}
+        <p class="font-family number-results">{{ results|length }} results found.</p>
+        <p class="font-family number-results">Search coffee shop name like "Starbucks", amenities like "Wifi", or location like "Upper West Side" </p>
+    {% else %}
+        {% if results|length == 1 %}
+            <p class="font-family number-results">{{ results|length }} result found.</p>
+        {% else %}
+            <p class="font-family number-results">{{ results|length }} results found.</p>
+        {% endif %}
+
+        <ul>
+            {% for result in results %}
+                <li class="cafe font-family big-bullet" data-id="{{ result.id }}">
+                    {% set words = result.name.split(' ') %}
+                    {% for word in words %}
+                        {% if word.lower() in query.lower() %}
+                            <span class="highlight">{{ word }}</span>
+                        {% else %}
+                            {{ word }}
+                        {% endif %}
+                    {% endfor %}
+                </li>
+
+                <p class="font-family small-bullet">
+                    <b>Borough: </b>
+                    {% set words = result.borough.split(' ') %}
+                    {% for word in words %}
+                        {% if word.lower() in query.lower() %}
+                            <span class="highlight">{{ word }}</span>
+                        {% else %}
+                            {{ word }}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+
+                <p class="font-family small-bullet">
+                    <b>Amenities: </b> 
+                    {% for amenity in result.amenities %}
+                        {% set words = amenity.split(' ') %}
+                        {% for word in words %}
+                            {% if word.lower() in query.lower() %}<span class="highlight">{{word}}</span>{% else %}{{word}}{% endif %}{% endfor %}{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                </p>
+            {% endfor %}
+    
+        </ul>
+    {% endif %}
+</body>
+</html>
+
+{% endblock  %}

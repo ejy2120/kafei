@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>  
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Study Cafes</title>
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-expand-lg sand navbar-dimensions">
+      <div class="container">
+        <a class="navbar-brand dark-blue" href="/">kafei</a>
+       
+        <form id="search-form" class="form-inline" href="/search" method="GET">
+          <input  id="search_input" class="input" type="search" placeholder="i'm looking for...">
+          <button id="submit_search" class="btn" type="submit">let's go!</button>
+          <a id="addCafe" href="/add">new cafe +</a>
+        </form>
+        
+      </div>
+    </nav>
+
+    <div class="container">   
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+
+
+  </body>
+</html>
+
+
+
+

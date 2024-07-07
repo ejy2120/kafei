@@ -1,0 +1,142 @@
+{% extends "navbar.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Add new cafe</title>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+    </head>
+    <body>
+        <!--message if new cafe is added successfully-->
+        <!--appears at top of page-->
+        <div id="newCafeAdded" class="alert">
+            <p>New cafe added!</p>
+            <button id="viewCafe" class="btn">View</button>
+        </div>
+
+        <!--form for adding new cafe-->
+        <h1 class="font-family addCafeHeader">Add New Cafe</h1>
+        <form id="addForm" class="font-family" action="/submit_data" method="post">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-5">
+                    <label class="inputHeader">Cafe Name </label><br>
+                    <textarea class="input" name="name" id="name" rows="4" cols="40" placeholder="No Starbucks allowed!"></textarea><br>
+                    <span id="nameError" class="error"></span><br><br>
+                </div>
+
+                <div class="col-5">
+                    <label class="inputHeader">Rating </label><br>
+                    <input type="number" step="0.1" class="input" name="google_rating" id="google_rating" placeholder="#"></textarea><br>
+                    <span id="ratingError" class="error"></span><br><br>
+                </div>
+                <div class="col-2"></div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="row">
+                <div class="col-3">
+                    <label class="inputHeader">Image 1</label><br>
+                    <textarea class="input" type="url" name="image1" id="image1" rows="4" cols="20" placeholder="Best picture here!"></textarea><br>
+                    <span id="image1Error" class="error"></span><br><br>
+                </div>
+    
+                <div class="col-3">
+                    <label class="inputHeader">Image 2</label><br>
+                    <textarea class="input" type="url" name="image2" id="image2" rows="4" cols="20" placeholder="Second image here"></textarea><br>
+                    <span id="image2Error" class="error"></span><br><br>
+                </div>
+    
+                <div class="col-3">
+                    <label class="inputHeader">Image 3</label><br>
+                    <textarea class="input" type="url" name="image3" id="image3" rows="4" cols="20" placeholder="Third image here"></textarea><br>
+                    <span id="image3Error" class="error"></span><br><br>
+                </div>
+    
+                <div class="col-3">
+                    <label class="inputHeader">Image 4</label><br>
+                    <textarea class="input" type="url" name="image4" id="image4" rows="4" cols="20" placeholder="Last but not least!"></textarea><br>
+                    <span id="image4Error" class="error"></span><br><br>
+                </div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <label class="inputHeader">Address </label><br>
+                    <textarea class="input" name="address" id="address" rows="4" cols="33" placeholder="e.g. 3009 Broadway, New York, NY 10027"></textarea><br>
+                    <span id="addressError" class="error"></span><br><br>
+                </div>
+
+                <div class="col-4">
+                    <label class="inputHeader">Borough </label><br>
+                    <textarea class="input" name="borough" id="borough" rows="4" cols="33" placeholder="e.g. Manhattan, UWS""></textarea><br>
+                    <span id="boroughError" class="error"></span><br><br>
+                </div>
+                <div class="col-2"></div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <label class="inputHeader">Amenities </label><br>
+                    <textarea class="input" name="amenities" id="amenities" rows="8" cols="33" placeholder="Wifi, Outlets, Other WFHs..."></textarea><br>
+                    <span id="amenitiesError" class="error"></span><br><br>
+                </div>
+
+                <div class="col-4">
+                    <label class="inputHeader">Open Hours (Mon - Sun) </label><br>
+                    <textarea class="input" name="open_hours" id="open_hours" rows="8" cols="33" placeholder="Monday 8:00AM - 9:00PM..."></textarea><br>
+                    <span id="hoursError" class="error"></span><br><br>
+                </div>
+                <div class="col-2"></div>
+            </div>
+
+            <div class="break"></div>
+
+            <div class="row">
+                <div class="col-1"></div>
+
+                <div class="col-3">
+                    <label class="inputHeader">About </label><br>
+                    <textarea class="input" name="about" id="about" rows="4" cols="25" placeholder="~3-4 sentences"></textarea><br>
+                    <span id="aboutError" class="error"></span><br><br>
+                </div>
+
+                <div class="col-3">
+                    <label class="inputHeader">Mini-blurb (for homepage) </label><br>
+                    <textarea class="input" type="text" name="miniblurb" id="miniblurb" rows="4" cols="25" placeholder="Short and sweet, please!"></textarea><br>
+                    <span id="miniblurbError" class="error"></span><br><br>
+                </div>
+
+                <div class="col-3">
+                    <label class="inputHeader">Insider Tips</label><br>
+                    <textarea class="input" type="text" name="insiderTips" id="insiderTips" rows="4" cols="25" placeholder="Give us all the secrets."></textarea><br>
+                    <span id="insiderTipsError" class="error"></span><br><br>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" id="submitNew" value="Submit">
+                </div>
+            </div>
+
+        
+
+        
+            
+        </form>
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Edit Existing Cafe</title>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+    </head>
+    
+    <body>
+        <form method="POST">
+            <h1 class="padding-top">Edit Cafe</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 padding-top">
+                        <input name="name" type="text" value="{{ cafe.name }}" class="fieldsStyling">
+                    </div>
+                    <div class="col-3 padding-top">
+                    </div>
+                    <div class="col-3 inline-block">
+                        <input name="google_rating" type="number" step="0.1" class="fieldsStyling upperLess" value="{{ cafe.google_rating }}">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="padding-top">
+                        <img class="img-crop" src="{{ cafe.image1 }}">
+                        <br>
+                        <input name="image1" type="text" value="{{ cafe.image1 }}" class="fieldsStyling less">
+                        <input name="image1alt" type="text" value="{{ cafe.image1alt }}" class="fieldsStyling less">
+                    </div>
+                    <div class="padding-top">
+                        <img class="img-crop" src="{{ cafe.image2 }}">
+                        <br>
+                        <input name="image2" type="text" value="{{ cafe.image2 }}" class="fieldsStyling less">
+                        <input name="image2alt" type="text" value="{{ cafe.image2alt }}" class="fieldsStyling less">
+                    </div>
+                    <div class="padding-top">
+                        <img class="img-crop" src="{{ cafe.image3 }}">
+                        <br>
+                        <input name="image3" type="text" value="{{ cafe.image3 }}" class="fieldsStyling less">
+                        <input name="image3alt" type="text" value="{{ cafe.image3alt }}" class="fieldsStyling less">
+                    </div>
+                    <div class="padding-top">
+                        <img class="img-crop" src="{{ cafe.image4 }}">
+                        <br>
+                        <input name="image4"  type="text" value="{{ cafe.image4 }}" class="fieldsStyling less">
+                        <input name="image4alt" type="text" value="{{ cafe.image4alt }}" class="fieldsStyling less">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-5 padding-top">
+                        <h4 class="padding-top">About</h4>
+    
+                        <textarea name="about" type="url" class="fieldsStyling more" rows="10" columns="500">{{ cafe.about }}</textarea>
+    
+                        <h4 class="padding-top">Amenities</h4>
+                        
+                        <div class="row text-align-justified container">
+                            {% for amenity in cafe.amenities %}
+                                <div class="col-6">
+                                    <input name="amenities[]" class="fieldsStyling upperMore" value="{{ amenity }}">
+                                </div>
+                                {% if loop.index is even %}
+                                    </div>
+                                    <div class="row">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <div>
+                            <h4 class="padding-top">Insider Tips</h4>
+                            <textarea name="insidertips" class="fieldsStyling more" rows="8" col="30">{{ cafe.insidertips }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-2"></div>
+
+                    <div class="col-3 padding-top">
+                        <h4 class="padding-top">Open Hours</h4>
+                        <textarea name="open_hours_input" class="fieldsStyling more" rows="7" cols="30">{{ cafe.open_hours | join("\n") }}</textarea>
+                        <input name="borough" class="fieldsStyling upperMore" value="{{ cafe.borough }}">
+                        <input name="address" class="fieldsStyling upperMore" value="{{ cafe.address }}">
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-9"></div>
+                <button id="submit_btn" type="submit" class="btn col-2">Submit</button>
+            </div>
+        </form>
+
+        <div class="row">
+            <button id="discard_changes" class="btn col-2">Discard Changes</button>
+            <div class="col-10"></div>
+        </div>
+        <div class="row">
+            <div id="warning_box" class="col-4">
+                <b>Are you sure you want to discard your changes?</b>
+                <br>
+                <button id="yes_discard">Yes, discard changes.</button>
+                <button id="no_discard">No, keep editing.</button>
+            </div>
+            <div class="col-8"></div>
+        </div>
+   
+        <div class="footer"></div>
+        
+        
+        
+    </body>
+</html>
+
+{% endblock %}
